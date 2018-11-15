@@ -1,0 +1,344 @@
+@import 'utilities/extends',
+        'utilities/functions',
+        'utilities/index',
+        'utilities/mixins',
+        'utilities/variables',
+        'base/base',
+        'base/index',
+        'base/normalize',
+        'components/buttons',
+        'components/forms',
+        'components/grid',
+        'components/images',
+        'components/index',
+        'components/navigation',
+        'components/typography';
+
+$white: #fff;
+$top-teal: #7de8c8;
+$ubiqui-blue: #74daf7;
+$error-red: #f77474;
+$warning-orange: #ff704c;
+$info-purple: #965dad;
+$success-green: #65ba64;
+$color-text: #868686;
+
+$max-width: 1000px;
+
+$breakpoints: (
+  'xs': 575px,
+  'sm': 576px,
+ 'med': 768px,
+  'lg': 992px,
+  );
+
+// Maps
+  $themes: (
+  'default': #74daf7,
+  'success': #65ba64,
+  'error': #f77474,
+  'warning': #ff704c,
+  'info': #965dad,
+  );
+
+  // mixins
+  @mixin center($w) {
+    width: $w;
+    max-width: $max-width;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @mixin flex (
+    $disp: flex,
+    $dir: null,
+    $wrap: null,
+    $just: null) {
+      // display: flex;
+      // flex-direction: column;
+      // flex-wrap: wrap;
+    display: $disp ;
+    flex-direction: $dir;
+    flex-wrap: $wrap;
+    justify-content: $just;
+
+  }
+
+    @mixin mq($break) {
+    $value: map-get($breakpoints, $break);
+    $sm: map-get($breakpoints, 'sm');
+
+     @if $value == null {
+            @error " #{$break} is not a valid breakpoint name"
+            }
+
+      @else if $value < $sm {
+      @media (max-width: $value) {
+              @content;
+              }
+          }
+      @else {
+            @media (min-width: $value) {
+              @content;
+          } } }
+
+    @mixin themes($map) {
+      @each $theme,
+        $color in $map {
+          &#{$theme} {
+            background-color: $color;
+            color: $white;
+            text-transform: uppercase;
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            &:hover {
+              background-color: lighten($color, 15%);
+              cursor: pointer;
+            }
+        }
+    }
+  }
+
+@mixin grid-div {
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  @content;
+}
+
+/*--global--*/
+* {
+  box-sizing: border-box;
+}
+.container {
+  @include center(85%);
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  color: $color-text;
+  background-color: $white;
+}
+
+.grid__row {
+  margin-bottom: 70px;
+}
+p {
+  text-align: justify;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  padding-bottom: 25px;
+}
+  .grid__col--3,
+  .grid__col--9,
+  .grid__col--12 {
+   margin-top:  50px;
+ }
+
+/*----Navigation styles----*/
+.nav {
+  width: 100%;
+  margin: 0 auto;
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+li {
+  list-style-type: none;
+}
+.nav__item a {
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.4em;
+  padding: 15px 0;
+  color: $color-text;
+  border-radius: 5px;
+  &:hover {
+    @extend .nav__item;
+      background-color: $top-teal;
+      color: $white;
+  }
+}
+.link {
+  color: $ubiqui-blue;
+  font-weight: bold;
+  text-decoration: none;
+}
+//Typography
+.headline--secondary {
+  text-align: left;
+  font-size: 1.2em;
+  font-weight: 200;
+}
+.headline--primary {
+  width: 80%;
+  padding-left: 30px;
+  color: $top-teal;
+  text-align: left;
+  line-height: 1em;
+  font-size: 2.1em;
+  font-weight: bolder;
+}
+.blockquote {
+  font-style: italic;
+  font-size: 1.5em;
+  line-height: 1.4em;
+  text-align: justify;
+  padding-left: 25px;
+  border-radius: 5px;
+  border-left: 10px solid $top-teal;
+}
+//layout
+.grid__col--4 {
+  padding: 50px 0;
+}
+.grid__col--12 {
+  @include flex($dir: column, $wrap: wrap);
+}
+
+//  Form
+.form {
+  @include flex($dir: column, $wrap: wrap);
+  // display: flex;
+  // flex-direction: column;
+  // flex-wrap: wrap;
+}
+
+.form__label--hidden {
+display: none;
+}
+
+.form__input {
+width: 100%;
+border-style: none;
+border-bottom: 10px solid $top-teal;
+font-size: 1em;
+outline: 0;
+opacity: 1.0;
+padding: 10px;
+margin-bottom: 15px;
+display: block;
+}
+
+// images
+.img--avatar {
+  @include center(50%);
+  margin-bottom: 30px;
+}
+.img--frame {
+  padding: 15px;
+  border: 1px solid #aaa;
+  margin: 30px 0;
+}
+
+// buttons
+.btn-- {
+  @include themes($themes);
+}
+// .btn--default {
+//   background-color: $ubiqui-blue;
+//   color: $white;
+//   text-transform: uppercase;
+//   font-size: 1.2em;
+//   font-weight: 600;
+//   padding: 15px;
+//   border-radius: 8px;
+//   margin-top: 30px;
+//   &:hover {
+//     background-color: lighten($ubiqui-blue, 15%);
+//     cursor: pointer;
+//   }
+// }
+// .btn--success {
+//   background-color: $success-green;
+//   color: $white;
+//   text-transform: uppercase;
+//   font-size: 1.2em;
+//   font-weight: 600;
+//   padding: 15px;
+//   border-radius: 8px;
+//   margin-top: 30px;
+//   &:hover {
+//     background-color: lighten($success-green, 15%);
+//     cursor: pointer;
+//   }
+// }
+// .btn--error {
+//   background-color: $error-red;
+//   color: $white;
+//   text-transform: uppercase;
+//   font-size: 1.2em;
+//   font-weight: 600;
+//   padding: 15px;
+//   border-radius: 8px;
+//   margin-top: 30px;
+//   &:hover {
+//     background-color: lighten($error-red, 15%);
+//     cursor: pointer;
+//   }
+// }
+// .btn--warning {
+//   background-color: $warning-orange;
+//   color: $white;
+//   text-transform: uppercase;
+//   font-size: 1.2em;
+//   font-weight: 600;
+//   padding: 15px;
+//   border-radius: 8px;
+//   margin-top: 30px;
+//   &:hover {
+//     background-color: lighten($warning-orange, 15%);
+//     cursor: pointer;
+//   }
+// }
+// .btn--info {
+//   background-color: $info-purple;
+//   color: $white;
+//   text-transform: uppercase;
+//   font-size: 1.2em;
+//   font-weight: 600;
+//   padding: 15px;
+//   border-radius: 8px;
+//   margin-top: 30px;
+//   &:hover {
+//     background-color: lighten($info-purple, 15%);
+//     cursor: pointer;
+//   }
+// }
+
+// grid
+.grid__col--12.theme__colors {
+  @include grid-div;
+  background-color: lighten($top-teal, 10%);
+}
+.grid__col--6.theme__colors {
+  @include grid-div;
+  background-color: darken($ubiqui-blue, 25%);
+}
+.grid__col--4.theme__colors {
+  @include grid-div;
+  background-color: lighten($ubiqui-blue, 10%);
+}
+.grid__col--3.theme__colors {
+  @include grid-div;
+  background-color: lighten($info-purple, 20%);
+}
+.grid__col--5.theme__colors {
+  @include grid-div;
+  background-color: lighten($success-green, 10%);
+}
+.grid__col--7.theme__colors {
+  @include grid-div;
+  background-color: lighten($error-red, 10%);
+}
+.grid__col--8.theme__colors {
+  @include grid-div;
+  background-color: lighten($warning-orange, 10%);
+}
