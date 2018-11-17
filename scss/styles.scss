@@ -12,7 +12,8 @@
         'components/images',
         'components/index',
         'components/navigation',
-        'components/typography';
+        'components/typography',
+        url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 $white: #fff;
 $top-teal: #7de8c8;
@@ -23,7 +24,11 @@ $info-purple: #965dad;
 $success-green: #65ba64;
 $color-text: #868686;
 
-$max-width: 1000px;
+$open-sans: 'Open Sans', sans-serif;
+
+$max-width: 1400px;
+
+$media-break: 769px;
 
 $breakpoints: (
   'xs': 575px,
@@ -49,38 +54,35 @@ $breakpoints: (
     margin-right: auto;
   }
 
-  @mixin flex (
+  @mixin flex-it (
     $disp: flex,
     $dir: null,
     $wrap: null,
     $just: null) {
-      // display: flex;
-      // flex-direction: column;
-      // flex-wrap: wrap;
-    display: $disp ;
-    flex-direction: $dir;
-    flex-wrap: $wrap;
-    justify-content: $just;
-
+      display: $disp ;
+      flex-direction: $dir;
+      flex-wrap: $wrap;
+      justify-content: $just;
+      @content;
   }
 
-    @mixin mq($break) {
-    $value: map-get($breakpoints, $break);
-    $sm: map-get($breakpoints, 'sm');
-
-     @if $value == null {
-            @error " #{$break} is not a valid breakpoint name"
-            }
-
-      @else if $value < $sm {
-      @media (max-width: $value) {
-              @content;
-              }
-          }
-      @else {
-            @media (min-width: $value) {
-              @content;
-          } } }
+    // @mixin mq($break) {
+    // $value: map-get($breakpoints, $break);
+    // $sm: map-get($breakpoints, 'sm');
+    //
+    //  @if $value == null {
+    //         @error " #{$break} is not a valid breakpoint name"
+    //         }
+    //
+    //   @else if $value < $sm {
+    //   @media (max-width: $value) {
+    //           @content;
+    //           }
+    //       }
+    //   @else {
+    //         @media (min-width: $value) {
+    //           @content;
+    //       } } }
 
     @mixin themes($map) {
       @each $theme,
@@ -112,23 +114,27 @@ $breakpoints: (
 /*--global--*/
 * {
   box-sizing: border-box;
+  // border: 1px solid red;
+}
+menu,
+ol,
+ul {
+    padding: 0;
+    margin: 0;
+}
+dd {
+    margin: 0;
 }
 .container {
-  @include center(85%);
+  @include center(90%);
   text-align: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: $open-sans;
   color: $color-text;
   background-color: $white;
 }
 
 .grid__row {
   margin-bottom: 70px;
-}
-p {
-  text-align: justify;
-  font-size: 1.1em;
-  line-height: 1.5em;
-  padding-bottom: 25px;
 }
   .grid__col--3,
   .grid__col--9,
@@ -137,35 +143,48 @@ p {
  }
 
 /*----Navigation styles----*/
+@media (min-width: 769px) {
+  .grid__row {
+    @include flex-it($dir: row);
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
 .nav {
-  width: 100%;
-  margin: 0 auto;
   ul {
     padding: 0;
     margin: 0;
   }
-}
-
-li {
-  list-style-type: none;
-}
-.nav__item a {
-  text-decoration: none;
-  text-align: center;
-  display: block;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.4em;
-  padding: 15px 0;
-  color: $color-text;
-  border-radius: 5px;
-  &:hover {
-    @extend .nav__item;
-      background-color: $top-teal;
-      color: $white;
+  @media (min-width: $media-break) {
+    @include flex-it($dir: row);
+    justify-content: space-around;
   }
 }
+
+.nav__item {
+  list-style-type: none;
+  margin-left: auto;
+  margin-right: auto;
+
+  a {
+    color: $color-text;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.4em;
+    padding: 10px 15px;
+    display: block;
+  }
+    a:hover {
+      background-color: $top-teal;
+      border-radius: 5px;
+      color: $white;
+  }
+    @media (min-width: $media-break) {
+    padding: 15px;
+  }
+}
+
 .link {
   color: $ubiqui-blue;
   font-weight: bold;
@@ -176,6 +195,7 @@ li {
   text-align: left;
   font-size: 1.2em;
   font-weight: 200;
+  margin: 0;
 }
 .headline--primary {
   width: 80%;
@@ -185,6 +205,12 @@ li {
   line-height: 1em;
   font-size: 2.1em;
   font-weight: bolder;
+}
+p {
+  text-align: justify;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  padding-bottom: 25px;
 }
 .blockquote {
   font-style: italic;
@@ -196,19 +222,14 @@ li {
   border-left: 10px solid $top-teal;
 }
 //layout
-.grid__col--4 {
-  padding: 50px 0;
-}
-.grid__col--12 {
-  @include flex($dir: column, $wrap: wrap);
-}
+
 
 //  Form
 .form {
-  @include flex($dir: column, $wrap: wrap);
-  // display: flex;
-  // flex-direction: column;
-  // flex-wrap: wrap;
+  @include flex-it($dir: column, $wrap: wrap);
+    .img--avatar {
+      align-self: center;
+    }
 }
 
 .form__label--hidden {
@@ -229,7 +250,6 @@ display: block;
 
 // images
 .img--avatar {
-  @include center(50%);
   margin-bottom: 30px;
 }
 .img--frame {
@@ -242,81 +262,72 @@ display: block;
 .btn-- {
   @include themes($themes);
 }
-// .btn--default {
-//   background-color: $ubiqui-blue;
-//   color: $white;
-//   text-transform: uppercase;
-//   font-size: 1.2em;
-//   font-weight: 600;
-//   padding: 15px;
-//   border-radius: 8px;
-//   margin-top: 30px;
-//   &:hover {
-//     background-color: lighten($ubiqui-blue, 15%);
-//     cursor: pointer;
-//   }
-// }
-// .btn--success {
-//   background-color: $success-green;
-//   color: $white;
-//   text-transform: uppercase;
-//   font-size: 1.2em;
-//   font-weight: 600;
-//   padding: 15px;
-//   border-radius: 8px;
-//   margin-top: 30px;
-//   &:hover {
-//     background-color: lighten($success-green, 15%);
-//     cursor: pointer;
-//   }
-// }
-// .btn--error {
-//   background-color: $error-red;
-//   color: $white;
-//   text-transform: uppercase;
-//   font-size: 1.2em;
-//   font-weight: 600;
-//   padding: 15px;
-//   border-radius: 8px;
-//   margin-top: 30px;
-//   &:hover {
-//     background-color: lighten($error-red, 15%);
-//     cursor: pointer;
-//   }
-// }
-// .btn--warning {
-//   background-color: $warning-orange;
-//   color: $white;
-//   text-transform: uppercase;
-//   font-size: 1.2em;
-//   font-weight: 600;
-//   padding: 15px;
-//   border-radius: 8px;
-//   margin-top: 30px;
-//   &:hover {
-//     background-color: lighten($warning-orange, 15%);
-//     cursor: pointer;
-//   }
-// }
-// .btn--info {
-//   background-color: $info-purple;
-//   color: $white;
-//   text-transform: uppercase;
-//   font-size: 1.2em;
-//   font-weight: 600;
-//   padding: 15px;
-//   border-radius: 8px;
-//   margin-top: 30px;
-//   &:hover {
-//     background-color: lighten($info-purple, 15%);
-//     cursor: pointer;
-//   }
-// }
+@media (min-width: 769px) {
+  .grid__col--12 button {
+  width: 15%;
+}
+}
 
 // grid
+.grid__col--4 {
+  padding: 50px 0;
+  @media (min-width: 769px) {
+    width: 30%;
+    padding: 0;
+    flex-basis: 32%;
+  }
+}
+
+.grid__col--12 {
+  @include flex-it($dir: column, $wrap: wrap);
+}
+
+@media (min-width: 769px) {
+  .grid__ {
+    &col--12 {
+      @include flex-it($dir: row);
+      width: 100%;
+      justify-content: space-around;
+    }
+    &col--6 {
+      flex: 2 50%;
+      margin: 5px;
+    }
+
+    &col--8 {
+      flex: 2;
+      margin: 5px;
+    }
+    &col--4 {
+      flex: 1;
+      margin: 5px;
+    }
+    &col--3 {
+      flex: 4 25%;
+      margin: 5px;
+    }
+    &col--5 {
+      flex-grow: 1;
+      margin: 5px;
+    }
+    &col--5 + &col--7 {
+      flex-grow: 2;
+      margin: 5px;
+    }
+  }
+  .grid__row > .grid__col--7 {
+    flex: 2;
+    margin: 5px;
+  }
+
+}
+
 .grid__col--12.theme__colors {
   @include grid-div;
   background-color: lighten($top-teal, 10%);
+  @media (min-width: 769px) {
+    flex: 1 100%;
+  }
 }
 .grid__col--6.theme__colors {
   @include grid-div;

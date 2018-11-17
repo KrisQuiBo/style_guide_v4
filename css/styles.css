@@ -5,6 +5,7 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 html {
   line-height: 1.15;
   /* 1 */
@@ -335,26 +336,30 @@ template {
   box-sizing: border-box;
 }
 
+menu,
+ol,
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+dd {
+  margin: 0;
+}
+
 .container {
-  width: 85%;
-  max-width: 1000px;
+  width: 90%;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #868686;
   background-color: #fff;
 }
 
 .grid__row {
   margin-bottom: 70px;
-}
-
-p {
-  text-align: justify;
-  font-size: 1.1em;
-  line-height: 1.5em;
-  padding-bottom: 25px;
 }
 
 .grid__col--3,
@@ -364,34 +369,48 @@ p {
 }
 
 /*----Navigation styles----*/
-.nav {
-  width: 100%;
-  margin: 0 auto;
+@media (min-width: 769px) {
+  .grid__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 .nav ul {
   padding: 0;
   margin: 0;
 }
-
-li {
-  list-style-type: none;
+@media (min-width: 769px) {
+  .nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
 }
 
-.nav__item a, .nav__item a:hover a {
-  text-decoration: none;
-  text-align: center;
-  display: block;
-  width: 90%;
+.nav__item {
+  list-style-type: none;
   margin-left: auto;
   margin-right: auto;
-  font-size: 1.4em;
-  padding: 15px 0;
+}
+.nav__item a {
   color: #868686;
-  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.4em;
+  padding: 10px 15px;
+  display: block;
 }
 .nav__item a:hover {
   background-color: #7de8c8;
+  border-radius: 5px;
   color: #fff;
+}
+@media (min-width: 769px) {
+  .nav__item {
+    padding: 15px;
+  }
 }
 
 .link {
@@ -404,6 +423,7 @@ li {
   text-align: left;
   font-size: 1.2em;
   font-weight: 200;
+  margin: 0;
 }
 
 .headline--primary {
@@ -416,6 +436,13 @@ li {
   font-weight: bolder;
 }
 
+p {
+  text-align: justify;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  padding-bottom: 25px;
+}
+
 .blockquote {
   font-style: italic;
   font-size: 1.5em;
@@ -426,20 +453,13 @@ li {
   border-left: 10px solid #7de8c8;
 }
 
-.grid__col--4 {
-  padding: 50px 0;
-}
-
-.grid__col--12 {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
 .form {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+}
+.form .img--avatar {
+  align-self: center;
 }
 
 .form__label--hidden {
@@ -459,10 +479,6 @@ li {
 }
 
 .img--avatar {
-  width: 50%;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 30px;
 }
 
@@ -543,11 +559,75 @@ li {
   cursor: pointer;
 }
 
+@media (min-width: 769px) {
+  .grid__col--12 button {
+    width: 15%;
+  }
+}
+.grid__col--4 {
+  padding: 50px 0;
+}
+@media (min-width: 769px) {
+  .grid__col--4 {
+    width: 30%;
+    padding: 0;
+    flex-basis: 32%;
+  }
+}
+
+.grid__col--12 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 769px) {
+  .grid__col--12 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+  }
+  .grid__col--6 {
+    flex: 2 50%;
+    margin: 5px;
+  }
+  .grid__col--8 {
+    flex: 2;
+    margin: 5px;
+  }
+  .grid__col--4 {
+    flex: 1;
+    margin: 5px;
+  }
+  .grid__col--3 {
+    flex: 4 25%;
+    margin: 5px;
+  }
+  .grid__col--5 {
+    flex-grow: 1;
+    margin: 5px;
+  }
+  .grid__col--5 + .grid__col--7 {
+    flex-grow: 2;
+    margin: 5px;
+  }
+
+  .grid__row > .grid__col--7 {
+    flex: 2;
+    margin: 5px;
+  }
+}
 .grid__col--12.theme__colors {
   padding: 15px;
   border-radius: 8px;
   margin-top: 10px;
   background-color: #a8f0da;
+}
+@media (min-width: 769px) {
+  .grid__col--12.theme__colors {
+    flex: 1 100%;
+  }
 }
 
 .grid__col--6.theme__colors {
