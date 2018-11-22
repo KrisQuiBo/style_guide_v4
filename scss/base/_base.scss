@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+  // border: 1px solid red;
+}
+p {
+  text-align: justify;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  padding-bottom: 25px;
+}
+ul {
+    padding: 0;
+    margin: 0;
+}
+/*--global--*/
+.container {
+  @include center(90%);
+  text-align: center;
+  font-family: $open-sans;
+  color: $color-text;
+  background-color: $white;
+}
+
+.grid__row {
+  margin: 65px 0;
+  @media (min-width: $media-break) {
+      @include flex-it($dir: row);
+      justify-content: space-between;
+      // align-items: center;
+  }
+}

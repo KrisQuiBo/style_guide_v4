@@ -1,0 +1,13 @@
+// buttons
+.btn-- {
+  @include themes($themes);
+}
+@media (min-width: $media-break) {
+  .grid__col--12 button {
+  width: 18%;
+}
+}
+
+.grid__col--12 {
+  @include flex-it($dir: column, $wrap: wrap);
+}

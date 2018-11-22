@@ -1,0 +1,23 @@
+$white: #fff;
+$top-teal: #7de8c8;
+$ubiqui-blue: #74daf7;
+$error-red: #f77474;
+$warning-orange: #ff704c;
+$info-purple: #965dad;
+$success-green: #65ba64;
+$color-text: #868686;
+
+$open-sans: 'Open Sans', sans-serif;
+$bold: 700;
+
+$max-width: 1400px;
+
+$media-break: 769px;
+// Maps
+  $themes: (
+  'default': #74daf7,
+  'success': #65ba64,
+  'error': #f77474,
+  'warning': #ff704c,
+  'info': #965dad,
+  );

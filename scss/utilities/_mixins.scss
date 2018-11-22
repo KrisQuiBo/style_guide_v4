@@ -1,0 +1,46 @@
+// mixins
+@mixin center($w) {
+  width: $w;
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin flex-it (
+  $disp: flex,
+  $dir: null,
+  $wrap: null,
+  $just: null) {
+    display: $disp ;
+    flex-direction: $dir;
+    flex-wrap: $wrap;
+    justify-content: $just;
+    @content;
+}
+
+@mixin themes($map) {
+  @each $theme,
+    $color in $map {
+      &#{$theme} {
+        background-color: $color;
+        color: $white;
+        text-transform: uppercase;
+        font-size: 1.2em;
+        font-weight: $bold;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 30px;
+        &:hover {
+          background-color: lighten($color, 15%);
+          cursor: pointer;
+        }
+    }
+}
+}
+
+@mixin grid-div {
+padding: 15px;
+border-radius: 8px;
+margin-top: 10px;
+@content;
+}

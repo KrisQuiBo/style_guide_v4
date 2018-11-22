@@ -1,0 +1,23 @@
+//  Form
+.form {
+  @include flex-it($dir: column, $wrap: wrap);
+    .img--avatar {
+      align-self: center;
+    }
+}
+
+.form__label--hidden {
+display: none;
+}
+
+.form__input {
+width: 100%;
+border-style: none;
+border-bottom: 10px solid $top-teal;
+font-size: 1em;
+outline: 0;
+opacity: 1.0;
+padding: 10px;
+margin-bottom: 15px;
+display: block;
+}
