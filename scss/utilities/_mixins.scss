@@ -10,12 +10,35 @@
   $disp: flex,
   $dir: null,
   $wrap: null,
-  $just: null) {
+  $just: null,
+  $basis: null,
+  $flex: null) {
     display: $disp ;
     flex-direction: $dir;
     flex-wrap: $wrap;
     justify-content: $just;
+    flex-basis: $basis;
+    flex-grow: $flex;
+    margin: 5px;
+    text-align: center;
     @content;
+}
+@mixin media($size) {
+  @if $size == 'lg' {
+      @media (min-width: $media-break) {
+          @content;
+      }
+  }
+  @else {
+      @error "'#{$size}' is not valid $size argument";
+  }
+}
+@mixin grid-width() {
+@for $i from 2 through 12 {
+  .grid__col--#{$i} {
+    width: col-width($i);
+  }
+}
 }
 
 @mixin themes($map) {
@@ -35,7 +58,14 @@
           cursor: pointer;
         }
     }
+  }
 }
+@mixin gridClr($map) {
+  @each $grdclr, $bgcolor in $gridColor {
+      .grid__#{$grdclr} {
+        background-color: $bgcolor;
+    }
+  }
 }
 
 @mixin grid-div {

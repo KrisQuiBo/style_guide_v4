@@ -1,70 +1,56 @@
-@media (min-width: $media-break) {
+// Grid
+.grid__col--12 {
+  @include flex-it($dir: column, $wrap: wrap);
+}
+
+@include media('lg') {
   .grid__ {
+
     &col--12 {
       @include flex-it($dir: row);
       width: 100%;
       justify-content: space-around;
     }
-
+    &col--3 {
+      @include flex-it($basis: col-width(4), $just: center);
+    // flex-basis: col-width(4);
+    }
+    &col--4 {
+        @include flex-it($basis: col-width(3), $just: center);
+    }
+    &col--5 {
+        @include flex-it($just: center, $basis: 35%);
+      // flex-basis: 35%;
+      // margin-right: 5px;
+    }
     &col--6 {
-      flex: 2 50%;
-      margin: 5px;
+      @include flex-it($basis: col-width(2), $just: center);
+    }
+    &col--7 {
+        @include flex-it($basis: 65%, $just: center);
+      // flex-basis: 65%;
+    }
+    &col--7:last-child {
+      margin-left: auto;
+      margin-right: auto;
     }
 
     &col--8 {
-      flex: 2;
-      margin: 5px;
+        @include flex-it($flex: 2, $just: center);
+      // flex: 2;
+      // margin-right: 5px;
     }
-    &col--4 {
-      flex: 1;
-      margin: 5px;
-    }
-    &col--3 {
-      flex: 4 25%;
-      margin: 5px;
-    }
-    &col--5 {
-      flex-basis: 35%;
-      margin: 5px;
-    }
-    &col--7 {
-      flex-basis: 65%;
-      margin: 5px;
-    }
-    &col--7:last-child {
-      margin: 5px auto;
-    }
-  }
-}
 
-.grid__col--12.theme__colors {
-  @include grid-div;
-  background-color: lighten($top-teal, 10%);
-  @media (min-width: $media-break) {
-    flex: 1 100%;
+      }
+}
+@for $i from 3 through 12 {
+  .grid__col--#{$i}.theme__colors {
+    @include grid-div;
+    }
   }
-}
-.grid__col--6.theme__colors {
-  @include grid-div;
-  background-color: darken($ubiqui-blue, 25%);
-}
-.grid__col--4.theme__colors {
-  @include grid-div;
-  background-color: lighten($ubiqui-blue, 10%);
-}
-.grid__col--3.theme__colors {
-  @include grid-div;
-  background-color: lighten($info-purple, 20%);
-}
-.grid__col--5.theme__colors {
-  @include grid-div;
-  background-color: lighten($success-green, 10%);
-}
-.grid__col--7.theme__colors {
-  @include grid-div;
-  background-color: lighten($error-red, 10%);
-}
-.grid__col--8.theme__colors {
-  @include grid-div;
-  background-color: lighten($warning-orange, 10%);
-}
+@each $grdclr, $bgcolor in $gridColor {
+    .grid__#{$grdclr}.theme__colors {
+        background-color: $bgcolor;
+      }
+    }
+    

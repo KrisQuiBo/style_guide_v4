@@ -1,23 +1,57 @@
+//color variables
 $white: #fff;
-$top-teal: #7de8c8;
+$top-teal: #7de6cf;
 $ubiqui-blue: #74daf7;
+$starter-blue: hsl(193, 100%, 50%);
 $error-red: #f77474;
-$warning-orange: #ff704c;
+$warning-orange: complement($ubiqui-blue);
 $info-purple: #965dad;
 $success-green: #65ba64;
 $color-text: #868686;
+$dark-teal: #3fabca;
 
+//fonts and typography
 $open-sans: 'Open Sans', sans-serif;
 $bold: 700;
 
+//layout variables
 $max-width: 1400px;
+$gutter: 5px;
 
+//media query variables
 $media-break: 769px;
+
+
 // Maps
   $themes: (
-  'default': #74daf7,
-  'success': #65ba64,
-  'error': #f77474,
-  'warning': #ff704c,
-  'info': #965dad,
+  'default': $ubiqui-blue,
+  'success': $success-green,
+  'error': $error-red,
+  'warning': $warning-orange,
+  'info': $info-purple,
   );
+
+  $breakpoints: (
+    'xs': 575px,
+    'sm': 576px,
+   'med': 768px,
+    'lg': 992px,
+    );
+
+    $buttons: (
+    'default',
+    'success',
+    'error',
+    'warning',
+    'info',
+    );
+
+    $gridColor: (
+    'col--12': $top-teal,
+    'col--3': lighten($info-purple, 15%),
+    'col--4': $ubiqui-blue,
+    'col--5': lighten($success-green, 15%),
+    'col--6': $dark-teal,
+    'col--7': complement($top-teal),
+    'col--8': lighten($warning-orange, 10%),
+    );
