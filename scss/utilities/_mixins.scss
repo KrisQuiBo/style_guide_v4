@@ -1,4 +1,6 @@
 // mixins
+
+//Center content
 @mixin center($w) {
   width: $w;
   max-width: $max-width;
@@ -6,6 +8,7 @@
   margin-right: auto;
 }
 
+//Apply flexbox to containers & items//
 @mixin flex-it (
   $disp: flex,
   $dir: null,
@@ -23,6 +26,8 @@
     text-align: center;
     @content;
 }
+
+//Media query for screens larger than 769px//
 @mixin media($size) {
   @if $size == 'lg' {
       @media (min-width: $media-break) {
@@ -33,14 +38,8 @@
       @error "'#{$size}' is not valid $size argument";
   }
 }
-@mixin grid-width() {
-@for $i from 2 through 12 {
-  .grid__col--#{$i} {
-    width: col-width($i);
-  }
-}
-}
 
+//apply colors to buttons //
 @mixin themes($map) {
   @each $theme,
     $color in $map {
@@ -60,6 +59,8 @@
     }
   }
 }
+
+//apply colors to grid items //
 @mixin gridClr($map) {
   @each $grdclr, $bgcolor in $gridColor {
       .grid__#{$grdclr} {
@@ -68,9 +69,10 @@
   }
 }
 
+// shape grid items and apply breathing space above //
 @mixin grid-div {
-padding: 15px;
-border-radius: 8px;
-margin-top: 10px;
-@content;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  @content;
 }

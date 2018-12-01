@@ -1,11 +1,8 @@
 /*----Navigation styles----*/
-
-
 .nav {
   margin-top: 50px;
     @include media('lg') {
-      @include flex-it($dir: row);
-      justify-content: space-around;
+      @include flex-it($dir: row, $just: space-around);
       margin: $gutter;
     }
 }

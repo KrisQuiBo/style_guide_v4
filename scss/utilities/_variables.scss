@@ -38,14 +38,6 @@ $media-break: 769px;
     'lg': 992px,
     );
 
-    $buttons: (
-    'default',
-    'success',
-    'error',
-    'warning',
-    'info',
-    );
-
     $gridColor: (
     'col--12': $top-teal,
     'col--3': lighten($info-purple, 15%),

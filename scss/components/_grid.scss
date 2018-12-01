@@ -1,56 +1,29 @@
 // Grid
-.grid__col--12 {
-  @include flex-it($dir: column, $wrap: wrap);
-}
 
-@include media('lg') {
-  .grid__ {
-
-    &col--12 {
-      @include flex-it($dir: row);
-      width: 100%;
-      justify-content: space-around;
-    }
-    &col--3 {
-      @include flex-it($basis: col-width(4), $just: center);
-    // flex-basis: col-width(4);
-    }
-    &col--4 {
-        @include flex-it($basis: col-width(3), $just: center);
-    }
-    &col--5 {
-        @include flex-it($just: center, $basis: 35%);
-      // flex-basis: 35%;
-      // margin-right: 5px;
-    }
-    &col--6 {
-      @include flex-it($basis: col-width(2), $just: center);
-    }
-    &col--7 {
-        @include flex-it($basis: 65%, $just: center);
-      // flex-basis: 65%;
-    }
-    &col--7:last-child {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    &col--8 {
-        @include flex-it($flex: 2, $just: center);
-      // flex: 2;
-      // margin-right: 5px;
-    }
-
-      }
-}
+//apply grid layout rules
 @for $i from 3 through 12 {
   .grid__col--#{$i}.theme__colors {
-    @include grid-div;
+    // @include grid-div;
+    @extend %grid-div;
     }
   }
+
+//apply colors to buttons
 @each $grdclr, $bgcolor in $gridColor {
     .grid__#{$grdclr}.theme__colors {
         background-color: $bgcolor;
       }
     }
-    
+
+//apply layout rules to large screens
+@include media('lg') {
+  @for $i from 3 through 12 {
+    .grid__col--#{$i}.theme__colors {
+      @include flex-it($just: center, $basis: colWidth($i));
+        }
+      }
+    .grid__col--7:last-child {
+      margin-left: auto;
+      margin-right: auto;
+  }
+}

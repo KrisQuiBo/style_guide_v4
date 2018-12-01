@@ -2,15 +2,21 @@
 .btn-- {
   @include themes($themes);
   }
-  @include media('lg') {
-    .grid__col--12 button {
-      width: 18%;
+
+.grid__col--12 {
+  @include flex-it($dir: column);
+  &button {
+    @include flex-it($dir: column, $wrap: wrap);
+    align-items: center;
   }
 }
-//buttons
-// .btn-- {
-//   @include themes($themes);
-// }
-//   @include media('lg') {
-//       @include flex-it($basis: 18%);
-//     }
+
+  @include media('lg') {
+    .grid__col--12 {
+    @include flex-it($dir: row);
+    width: 100%;
+  }
+    .grid__col--12 .theme__colors {
+    @include flex-it($dir: row,  $basis: 20%, $just: space-around)
+  }
+}
