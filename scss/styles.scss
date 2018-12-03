@@ -1,31 +1,3 @@
-@import 'utilities/extends',
-        'utilities/functions',
-        'utilities/index',
-        'utilities/mixins',
-        'utilities/variables',
-        'base/base',
-        'base/index',
-        'base/normalize',
-        'components/buttons',
-        'components/forms',
-        'components/grid',
-        'components/images',
-        'components/index',
-        'components/navigation',
-        'components/typography',
-        url('https://fonts.googleapis.com/css?family=Open+Sans');
-
-
-/*--global--*/
-
-ul, ol {
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  @include center(90%);
-  font-family: $open-sans;
-  color: $color-text;
-  background-color: $white;
-}
+@import 'utilities/index.scss',
+        'base/index.scss',
+        'components/index.scss';
